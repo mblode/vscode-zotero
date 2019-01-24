@@ -1,33 +1,66 @@
 {
 	"name": "zotero",
 	"displayName": "Zotero",
-	"description": "Zotero Markdown citations for VS Code",
-	"version": "0.0.1",
+	"description": "Zotero Better Bibtex citations for VS Code",
+	"version": "0.1.0",
+	"publisher": "mblode",
+	"author": {
+		"name": "Matthew Blode",
+		"email": "m.blode@gmail.com",
+		"url": "https://matthewblode.com"
+	},
+	"homepage": "https://github.com/mblode/vscode-zotero",
+	"bugs": {
+		"url": "https://github.com/mblode/vscode-zotero/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mblode/vscode-zotero.git"
+	},
+	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.30.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"activationEvents": [
-		"onCommand:extension.helloWorld"
+	"keywords": [
+		"markdown",
+		"zotero",
+		"betterbibtex",
+		"better bibtex",
+		"citations"
 	],
-	"main": "./extension.js",
+	"activationEvents": [
+		"onCommand:extension.zotero"
+	],
+	"main": "./src/extension.js",
 	"contributes": {
-		"commands": [{
-            "command": "extension.helloWorld",
-			"title": "Hello World"
-		}]
+		"commands": [
+			{
+				"command": "extension.zotero",
+				"title": "Zotero Picker"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.zotero",
+				"key": "alt+shift+z"
+			}
+		]
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"typescript": "^3.1.4",
-		"vscode": "^1.1.25",
-		"eslint": "^4.11.0",
+		"@types/mocha": "^2.2.42",
 		"@types/node": "^8.10.25",
-		"@types/mocha": "^2.2.42"
+		"eslint": "^4.11.0",
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25"
+	},
+	"dependencies": {
+		"request-promise": "^4.2.2"
 	}
 }
