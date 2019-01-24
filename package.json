@@ -1,8 +1,8 @@
 {
-	"name": "zotero",
-	"displayName": "Zotero",
-	"description": "Zotero Better Bibtex citations for VS Code",
-	"version": "0.1.0",
+	"name": "zotero-citation-picker",
+	"displayName": "Zotero Citation Picker",
+	"description": "Zotero Better Bibtex citation picker for VS Code",
+	"version": "0.1.1",
 	"publisher": "mblode",
 	"author": {
 		"name": "Matthew Blode",
@@ -32,19 +32,19 @@
 		"citations"
 	],
 	"activationEvents": [
-		"onCommand:extension.zotero"
+		"onCommand:extension.zoteroCitationPicker"
 	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.zotero",
-				"title": "Zotero Picker"
+				"command": "extension.zoteroCitationPicker",
+				"title": "Zotero Citation Picker"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.zotero",
+				"command": "extension.zoteroCitationPicker",
 				"key": "alt+shift+z"
 			}
 		]
