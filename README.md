@@ -2,7 +2,7 @@
   <img src="https://github.com/mblode/vscode-zotero/blob/master/images/icon.png?raw=true" alt="" width=100 height=100>
 </a>
 
-# VS Code Zotero Citation Picker
+# VS Code Citation Picker for Zotero
 
 This package adds Zotero support to VS Code Markdown editing. To use it, you will need to have the Better BibTeX plugin installed in Zotero.
 
