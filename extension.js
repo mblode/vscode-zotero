@@ -2,10 +2,10 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const editor = vscode.window.activeTextEditor;
-const request = require('request-promise')
+const requestPromise = require('request-promise')
 
 const showZoteroPicker = () => {
-	return request(`http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc`)
+	return requestPromise(`http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc`)
 		.then(function(result) {
 			if (result) {
 				editor.edit(
