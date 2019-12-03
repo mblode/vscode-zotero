@@ -3,10 +3,11 @@
 const vscode = require('vscode');
 const editor = vscode.window.activeTextEditor;
 const requestPromise = require('request-promise')
+const config = vscode.workspace.getConfiguration('zotero-citation-picker');
 
 const showZoteroPicker = () => {
-	return requestPromise(`http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc`)
-		.then(function(result) {
+	return requestPromise(config.port)
+		.then(function (result) {
 			if (result) {
 				editor.edit(
 					edit => editor.selections.forEach(
@@ -20,7 +21,7 @@ const showZoteroPicker = () => {
 				return;
 			}
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			console.log('Failed to fetch citation: %j', err.message);
 			vscode.window.showErrorMessage('Zotero Citations: could not connect to Zotero. Are you sure it is running?');
 		});
@@ -40,7 +41,7 @@ function activate(context) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.zoteroCitationPicker', function() {
+	let disposable = vscode.commands.registerCommand('extension.zoteroCitationPicker', function () {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
@@ -52,7 +53,7 @@ function activate(context) {
 exports.activate = activate;
 
 // this method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
 	activate,

@@ -2,7 +2,7 @@
 	"name": "zotero",
 	"displayName": "Citation Picker for Zotero",
 	"description": "Zotero Better Bibtex citation picker for VS Code",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"publisher": "mblode",
 	"author": {
 		"name": "Matthew Blode",
@@ -47,7 +47,18 @@
 				"command": "extension.zoteroCitationPicker",
 				"key": "alt+shift+z"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Zotero Citation Picker",
+			"properties": {
+				"zotero-citation-picker.port": {
+					"type": "string",
+					"default": "http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc",
+					"description": "Customise what port/URL will be used for the picker."
+				}
+			}
+		}
 	},
 	"devDependencies": {
 		"@types/mocha": "^5.2.7",
@@ -58,6 +69,6 @@
 	},
 	"dependencies": {
 		"request": "^2.88.0",
-		"request-promise": "^4.2.2"
+		"request-promise": "^4.2.5"
 	}
 }
