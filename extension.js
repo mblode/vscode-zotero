@@ -1,7 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-const editor = vscode.window.activeTextEditor;
 const requestPromise = require('request-promise')
 const config = vscode.workspace.getConfiguration('zotero-citation-picker');
 
@@ -9,6 +8,7 @@ const showZoteroPicker = () => {
 	return requestPromise(config.port)
 		.then(function (result) {
 			if (result) {
+				editor = vscode.window.activeTextEditor;
 				editor.edit(
 					edit => editor.selections.forEach(
 						selection => {
