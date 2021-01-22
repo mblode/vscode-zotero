@@ -1,74 +1,74 @@
 {
-	"name": "zotero",
-	"displayName": "Citation Picker for Zotero",
-	"description": "Zotero Better Bibtex citation picker for VS Code",
-	"version": "0.1.9",
-	"publisher": "mblode",
-	"author": {
-		"name": "Matthew Blode",
-		"email": "m.blode@gmail.com",
-		"url": "https://matthewblode.com"
-	},
-	"homepage": "https://github.com/mblode/vscode-zotero",
-	"bugs": {
-		"url": "https://github.com/mblode/vscode-zotero/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/mblode/vscode-zotero.git"
-	},
-	"icon": "images/icon.png",
-	"engines": {
-		"vscode": "^1.30.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"keywords": [
-		"markdown",
-		"zotero",
-		"betterbibtex",
-		"better bibtex",
-		"citations"
-	],
-	"activationEvents": [
-		"onCommand:extension.zoteroCitationPicker"
-	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.zoteroCitationPicker",
-				"title": "Zotero Citation Picker"
-			}
-		],
-		"keybindings": [
-			{
-				"command": "extension.zoteroCitationPicker",
-				"key": "alt+shift+z"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Zotero Citation Picker",
-			"properties": {
-				"zotero-citation-picker.port": {
-					"type": "string",
-					"default": "http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc",
-					"description": "Customise what port/URL will be used for the picker."
-				}
-			}
-		}
-	},
-	"devDependencies": {
-		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.6.9",
-		"eslint": "^6.1.0",
-		"typescript": "^3.1.4",
-		"vscode": "^1.1.25"
-	},
-	"dependencies": {
-		"request": "^2.88.0",
-		"request-promise": "^4.2.5"
-	}
+    "name": "zotero",
+    "displayName": "Citation Picker for Zotero",
+    "description": "Zotero Better Bibtex citation picker for VS Code",
+    "version": "0.1.10",
+    "publisher": "mblode",
+    "author": {
+        "name": "Matthew Blode",
+        "email": "m.blode@gmail.com",
+        "url": "https://matthewblode.com"
+    },
+    "homepage": "https://github.com/mblode/vscode-zotero",
+    "bugs": {
+        "url": "https://github.com/mblode/vscode-zotero/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mblode/vscode-zotero.git"
+    },
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "markdown",
+        "zotero",
+        "betterbibtex",
+        "better bibtex",
+        "citations"
+    ],
+    "activationEvents": [
+        "onCommand:extension.zoteroCitationPicker"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.zoteroCitationPicker",
+                "title": "Zotero Citation Picker"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.zoteroCitationPicker",
+                "key": "alt+shift+z"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Zotero Citation Picker",
+            "properties": {
+                "zotero-citation-picker.port": {
+                    "type": "string",
+                    "default": "http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc",
+                    "description": "Customise what port/URL will be used for the picker."
+                }
+            }
+        }
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.6.9",
+        "eslint": "^6.1.0",
+        "typescript": "^3.1.4",
+        "vscode": "^1.1.25"
+    },
+    "dependencies": {
+        "request": "^2.88.0",
+        "request-promise": "^4.2.5"
+    }
 }
