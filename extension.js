@@ -27,6 +27,88 @@ const showZoteroPicker = () => {
 		});
 };
 
+async function openInZotero() {
+    const editor = vscode.window.activeTextEditor;
+
+    if (!editor) {
+        return;
+    }
+
+    // const citeKey = extractCiteKey(editor);
+	var citeKey = '';
+
+	if (editor.selection.isEmpty) {
+        const range = editor.document.getWordRangeAtPosition(editor.selection.active);
+        citeKey = editor.document.getText(range);
+    } else {
+        citeKey = editor.document.getText(new vscode.Range(editor.selection.start, editor.selection.end));
+    }
+    console.log(`Opening ${citeKey} in Zotero`);
+
+    const uri = vscode.Uri.parse(`zotero://select/items/bbt:${citeKey}`);
+    await vscode.env.openExternal(uri);
+};
+
+async function openPDFZotero() {
+    const editor = vscode.window.activeTextEditor;
+
+    if (!editor) {
+        return;
+    }
+
+    // const citeKey = extractCiteKey(editor);
+	var citeKey = '';
+
+	if (editor.selection.isEmpty) {
+        const range = editor.document.getWordRangeAtPosition(editor.selection.active);
+        citeKey = editor.document.getText(range);
+    } else {
+        citeKey = editor.document.getText(new vscode.Range(editor.selection.start, editor.selection.end));
+    }
+    console.log(`Opening ${citeKey} in Zotero`);
+
+	var options = {
+		method: 'POST',
+		uri: 'http://localhost:23119/better-bibtex/json-rpc',
+		body : {
+			'jsonrpc' : '2.0',
+			'method' : 'item.attachments',
+			'params' : [ citeKey ] 
+		},
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json',
+			'User-Agent': 'Request-Promise'
+		},
+		json: true // Automatically parses the JSON string in the response
+	};
+	
+	var uri = vscode.Uri.parse(`zotero://select/items/bbt:${citeKey}`);
+
+	requestPromise(options)
+		.then(async function (repos) {
+			console.log(repos['result']);
+			console.log('User has %d repos', repos['result'].length);
+			for (const elt of repos['result']) {
+				console.log(elt);
+				if (elt['path'].endsWith('.pdf')) {
+					console.log('ends with pdf');
+					uri = vscode.Uri.parse(elt['open']);
+					break;
+				}
+			};
+			console.log(uri);
+			await vscode.env.openExternal(uri);
+				
+		})
+		.catch(function (err) {
+			// API call failed...
+			console.log('API open PDF in Zotero failed');
+		});
+
+
+};
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -37,6 +119,9 @@ function activate(context) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "zotero citation picker" is now active!');
+
+	context.subscriptions.push(vscode.commands.registerCommand('extension.openInZotero', openInZotero));
+	context.subscriptions.push(vscode.commands.registerCommand('extension.openPDFZotero', openPDFZotero));
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
@@ -49,7 +134,9 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
+
 }
+
 exports.activate = activate;
 
 // this method is called when your extension is deactivated
