@@ -11,7 +11,7 @@ This package adds Zotero support to VS Code Markdown editing. To use it, you wil
 If you don't feel like typing citations out (and let's be honest, you don't), executing 'Zotero Citation Picker' will call up a graphical picker which will insert these for you, formatted and all.
 
 - Activate via Command Palette (command + shift + P): Type "Zotero Citation Picker" and press enter.
-- Activae via keyboard shortcut: Use alt+shift+z
+- Activate via keyboard shortcut: Use alt+shift+z
 
 ![Screenshot](images/screenshot.png)
 
