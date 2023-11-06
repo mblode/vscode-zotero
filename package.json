@@ -2,12 +2,18 @@
     "name": "zotero",
     "displayName": "Citation Picker for Zotero",
     "description": "Zotero Better Bibtex citation picker for VS Code",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "publisher": "mblode",
     "author": {
         "name": "Matthew Blode",
-        "email": "m.blode@gmail.com",
+        "email": "m@blode.co",
         "url": "https://matthewblode.com"
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "eslint src --ext ts"
     },
     "homepage": "https://github.com/mblode/vscode-zotero",
     "bugs": {
@@ -19,7 +25,7 @@
     },
     "icon": "images/icon.png",
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.84.0"
     },
     "categories": [
         "Other"
@@ -31,12 +37,8 @@
         "better bibtex",
         "citations"
     ],
-    "activationEvents": [
-        "onCommand:extension.zoteroCitationPicker",
-        "onCommand:extension.openInZotero",
-        "onCommand:extension.openPDFZotero"
-    ],
-    "main": "./extension.js",
+    "activationEvents": [],
+    "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
@@ -79,11 +81,17 @@
         }
     },
     "devDependencies": {
-        "@types/mocha": "^5.2.7",
-        "@types/node": "^12.6.9",
-        "eslint": "^6.1.0",
-        "typescript": "^3.1.4",
-        "vscode": "^1.1.25"
+        "@types/mocha": "^10.0.3",
+        "@types/node": "18.x",
+        "@types/request-promise": "^4.1.50",
+        "@types/vscode": "^1.84.0",
+        "@typescript-eslint/eslint-plugin": "^6.9.0",
+        "@typescript-eslint/parser": "^6.9.0",
+        "@vscode/test-electron": "^2.3.6",
+        "eslint": "^8.52.0",
+        "glob": "^10.3.10",
+        "mocha": "^10.2.0",
+        "typescript": "^5.2.2"
     },
     "dependencies": {
         "request": "^2.88.0",
