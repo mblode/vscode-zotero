@@ -13,7 +13,7 @@ If you don't feel like typing citations out (and let's be honest, you don't), ex
 - Activate via Command Palette (command + shift + P): Type "Zotero Citation Picker" and press enter.
 - Activate via keyboard shortcut: Use alt+shift+z
 
-![Screenshot](images/screenshot.png)
+<img src="images/screenshot.png" style="width: 80%;" alt="Screenshot">
 
 ## Requirements
 
