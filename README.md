@@ -4,7 +4,10 @@
 
 # VS Code Citation Picker for Zotero
 
-This package adds Zotero support to VS Code Markdown editing. To use it, you will need to have the Better BibTeX plugin installed in Zotero.
+This extension integrates Zotero (with Better BibTeX) into VS Code, supporting citations across multiple languages and formats. \
+The standard configuration (`?format=pandoc`) works for markdown.
+
+Make sure you have Better BibTeX installed in Zotero to use it.
 
 ## Features
 
@@ -20,11 +23,14 @@ If you don't feel like typing citations out (and let's be honest, you don't), ex
 **IMPORTANT:** Zotero, with Better BibTeX installed, must be running while you use these.
 
 ## Configuration
+
 The formats which are supported by this plugin depend on the [CAYW (Cite as you Write)](https://retorque.re/zotero-better-bibtex/citing/cayw/index.html) implementation by zotero-better-bibtex.
 
 An excerpt of the formats that are supported are as follows:
 - `cite` for latex, uses the cite command
 - `biblatex` for biblatex, uses the autocite command
+- `pandoc`
+- `mmd` for MultiMarkdown
 - `asciidoctor-bibtex`
 - `jupyter`
 - `typst`
