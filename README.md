@@ -1,5 +1,5 @@
 <a href="https://marketplace.visualstudio.com/items?itemName=mblode.zotero">
-  <img src="https://github.com/mblode/vscode-zotero/blob/master/images/icon.png?raw=true" alt="" width=100 height=100>
+  <img src="images/icon.png" alt="" width=100 height=100>
 </a>
 
 # VS Code Citation Picker for Zotero
