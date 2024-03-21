@@ -27,8 +27,9 @@ If you don't feel like typing citations out (and let's be honest, you don't), ex
 The formats which are supported by this plugin depend on the [CAYW (Cite as you Write)](https://retorque.re/zotero-better-bibtex/citing/cayw/index.html) implementation by zotero-better-bibtex.
 
 An excerpt of the formats that are supported are as follows:
-- `latex` generates natbib citations using the cite command by default (configurable, documentation above)
-- `biblatex` uses the autocite command by default (configurable, documentation above)
+- `natbib` generates [natbib](https://ctan.org/pkg/natbib) citations for LaTeX using the cite command by default (configurable, see documentation above)
+  - `latex` and `cite` are aliases for `natbib` and also use the `cite` command
+- `biblatex` uses the autocite command by default (configurable, see documentation above)
 - `pandoc`
 - `mmd` for MultiMarkdown
 - `asciidoctor-bibtex`
