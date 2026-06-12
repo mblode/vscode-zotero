@@ -5,20 +5,59 @@ interface ZoteroConfig {
   port: number;
 }
 
+/**
+ * Resolve the text editor we should act on.
+ *
+ * `vscode.window.activeTextEditor` is undefined on some surfaces — most
+ * notably notebook/.qmd editors in Positron — even though the user is
+ * clearly typing into a cell. In that case fall back to the text editor
+ * backing the active notebook cell.
+ */
+function resolveActiveEditor(): vscode.TextEditor | undefined {
+  const editor = vscode.window.activeTextEditor;
+  if (editor) {
+    return editor;
+  }
+
+  const notebookEditor = vscode.window.activeNotebookEditor;
+  if (notebookEditor) {
+    const selection = notebookEditor.selection;
+    const cell = notebookEditor.notebook.cellAt(selection.start);
+    if (cell) {
+      const cellEditor = vscode.window.visibleTextEditors.find(
+        candidate => candidate.document.uri.toString() === cell.document.uri.toString()
+      );
+      if (cellEditor) {
+        return cellEditor;
+      }
+    }
+  }
+
+  return undefined;
+}
+
 async function showZoteroPicker(): Promise<void> {
   const config: ZoteroConfig = vscode.workspace.getConfiguration('zotero-citation-picker') as any;
 
   try {
     const result: string = await requestPromise(String(config.port));
     if (result) {
-      const editor = vscode.window.activeTextEditor;
+      const editor = resolveActiveEditor();
       if (editor) {
-        editor.edit(editBuilder => {
+        await editor.edit(editBuilder => {
           editor.selections.forEach(selection => {
             editBuilder.delete(selection);
             editBuilder.insert(selection.start, result);
           });
         });
+      } else {
+        // No text editor or notebook cell to insert into (common on some
+        // Positron surfaces). Don't lose the citation — put it on the
+        // clipboard and tell the user.
+        await vscode.env.clipboard.writeText(result);
+        vscode.window.showInformationMessage(
+          'Zotero Citations: no active editor to insert into, so the citation was copied to your clipboard.'
+        );
       }
     }
   } catch (err: any) {
@@ -28,7 +67,7 @@ async function showZoteroPicker(): Promise<void> {
 }
 
 async function openInZotero(): Promise<void> {
-  const editor = vscode.window.activeTextEditor;
+  const editor = resolveActiveEditor();
 
   if (!editor) {
     return;
@@ -51,7 +90,7 @@ async function openInZotero(): Promise<void> {
 }
 
 async function openPDFZotero(): Promise<void> {
-  const editor = vscode.window.activeTextEditor;
+  const editor = resolveActiveEditor();
 
   if (!editor) {
     return;
