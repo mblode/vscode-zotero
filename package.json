@@ -7,7 +7,7 @@
     "author": {
         "name": "Matthew Blode",
         "email": "m@blode.co",
-        "url": "https://matthewblode.com"
+        "url": "https://blode.co"
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
