@@ -56,3 +56,12 @@ You can append CAYW query parameters to change the inserted text or behaviour:
 - **Juris-M** (or any fork on a different port): change the port, e.g. `24119` instead of `23119`.
 
 See the [CAYW documentation](https://retorque.re/zotero-better-bibtex/citing/cayw/) for the full list of formats and options.
+
+## License
+
+MIT
+
+---
+
+Crafted by [<img src="https://matthewblode.com/avatar-circle.png" width="20" align="top" />](https://matthewblode.com) [Matthew Blode](https://matthewblode.com)
+
