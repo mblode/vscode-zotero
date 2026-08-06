@@ -8,7 +8,7 @@ Press one shortcut in a Markdown file, search your library in the Zotero picker,
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=mblode.zotero">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/mblode.zotero?style=flat&colorA=000000&colorB=000000" />
+    <img src="https://vsmarketplacebadges.dev/version-short/mblode.zotero.svg?style=flat&colorA=000000&colorB=000000" />
   </a>
   <a href="https://github.com/mblode/vscode-zotero/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/mblode/vscode-zotero?style=flat&colorA=000000&colorB=000000" />
