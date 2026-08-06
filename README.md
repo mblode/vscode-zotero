@@ -1,61 +1,62 @@
-<a href="https://marketplace.visualstudio.com/items?itemName=mblode.zotero">
-  <img src="https://raw.githubusercontent.com/mblode/vscode-zotero/main/images/icon.png" alt="" width=100 height=100>
-</a>
+<div align="center">
 
-# VS Code Citation Picker for Zotero
+# Citation Picker for Zotero
 
-This package adds Zotero support to VS Code Markdown editing. To use it, you will need to have the Better BibTeX plugin installed in Zotero.
+**Pick a reference in Zotero and drop a formatted [Better BibTeX](https://retorque.re/zotero-better-bibtex/) citation at your cursor**
 
-## Features
+Press one shortcut in a Markdown file, search your library in the Zotero picker, and the citekey is inserted for you.
 
-If you don't feel like typing citations out (and let's be honest, you don't), executing 'Zotero Citation Picker' will call up a graphical picker which will insert these for you, formatted and all.
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=mblode.zotero">
+    <img src="https://img.shields.io/visual-studio-marketplace/v/mblode.zotero?style=flat&colorA=000000&colorB=000000" />
+  </a>
+  <a href="https://github.com/mblode/vscode-zotero/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/github/license/mblode/vscode-zotero?style=flat&colorA=000000&colorB=000000" />
+  </a>
+</p>
 
-- Activate via Command Palette (command + shift + P): Type "Zotero Citation Picker" and press enter.
-- Activate via keyboard shortcut: Use alt+shift+z
+</div>
 
-![Screenshot](images/screenshot.png)
+## Install
+
+```bash
+ext install mblode.zotero
+```
+
+Paste that into Quick Open (`cmd+P`), or search "Citation Picker for Zotero" in the Extensions panel.
+
+## Quickstart
+
+Start Zotero, open a Markdown file in VS Code, and press `alt+shift+z`. The Better BibTeX picker opens over the editor; choose a reference and the citation replaces your selection.
+
+<img src="https://raw.githubusercontent.com/mblode/vscode-zotero/main/images/screenshot.png" alt="The Zotero picker open over a Markdown file in VS Code" />
+
+## Commands
+
+| Command | Shortcut | Action |
+|---------|----------|--------|
+| Zotero Citation Picker | `alt+shift+z` | Insert a citation at the cursor. |
+| Open in Zotero | `ctrl+shift+z` | Open the citekey under the cursor as a Zotero item. |
+| Open PDF from Zotero | `ctrl+alt+shift+z` | Open the first PDF attached to that item. |
+
+With no editor to insert into, the citation goes to your clipboard instead of being lost.
+
+## Settings
+
+The picker calls Better BibTeX's Cite as you Write endpoint. `zotero-citation-picker.port` holds the URL it requests, and defaults to `http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc`. Edit that value to change what gets inserted:
+
+- **`&minimize=true`:** leaves Zotero in the background instead of taking focus.
+- **`&brackets=1`:** wraps the citation in Pandoc brackets, `[@key]`.
+- **`format=biblatex`:** inserts `\autocite{key}` instead of a Pandoc citekey.
+- **`format=playground`:** inserts the bare citekey, with no `@` and no brackets.
+- **Port `24119`:** Juris-M and other forks listen there rather than on `23119`.
+
+The [CAYW documentation](https://retorque.re/zotero-better-bibtex/citing/cayw/) lists every format and parameter.
 
 ## Requirements
 
-**IMPORTANT:** Zotero, with Better BibTeX installed, must be running while you use these.
-
-## Configuration
-
-The extension talks to Better BibTeX's [Cite as you Write (CAYW)](https://retorque.re/zotero-better-bibtex/citing/cayw/) endpoint. You can customise the URL it calls via the **Zotero Citation Picker: Port** setting (`zotero-citation-picker.port`). The default is:
-
-```
-http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc
-```
-
-You can append CAYW query parameters to change the inserted text or behaviour:
-
-- **Keep Zotero in the background** (don't steal focus after inserting): add `&minimize=true`.
-
-  ```
-  http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc&minimize=true
-  ```
-
-- **Wrap citations in brackets** (Pandoc-style `[@key]`): add `&brackets=1`.
-
-  ```
-  http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc&brackets=1
-  ```
-
-- **LaTeX / no leading `@`**: use a LaTeX format instead of `pandoc`, e.g. `format=biblatex` (inserts `\autocite{key}`) or `format=latex` with a command:
-
-  ```
-  http://127.0.0.1:23119/better-bibtex/cayw?format=biblatex
-  ```
-
-- **Plain citekey only** (no `@`, no brackets): use `format=playground`.
-
-  ```
-  http://127.0.0.1:23119/better-bibtex/cayw?format=playground
-  ```
-
-- **Juris-M** (or any fork on a different port): change the port, e.g. `24119` instead of `23119`.
-
-See the [CAYW documentation](https://retorque.re/zotero-better-bibtex/citing/cayw/) for the full list of formats and options.
+- Zotero has to be running, with the [Better BibTeX](https://retorque.re/zotero-better-bibtex/) plugin installed. The picker belongs to Better BibTeX, so nothing works without it.
+- VS Code 1.84 or newer.
 
 ## License
 
@@ -64,4 +65,3 @@ MIT
 ---
 
 Crafted by [<img src="https://blode.co/avatar-circle.png" width="20" align="top" />](https://blode.co) [Matthew Blode](https://blode.co)
-
