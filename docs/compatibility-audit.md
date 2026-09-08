@@ -70,6 +70,6 @@ Source commit: `ce75f8f53db8ca1a17bdf08a9fcc0a0488379601`.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=mblode.zotero) reports 0.2.0, updated 2026-09-08T00:40:01.783Z. Its publicly downloaded VSIX, after HTTP gzip decompression, exactly matches the tested local package and GitHub release asset with the SHA-256 above.
 
-Open VSX still needs completion of browser sign-in or Chrome's file-upload permission before the same VSIX can be published. Its public listing remains 0.1.10; #20/#37 are not yet resolved. The tested package is available from the GitHub release for manual installation.
+Open VSX 0.2.0 is now published. Its public VSIX download exactly matches the tested Marketplace/GitHub artifact (SHA-256 above), resolving the publication requests #20/#37. Publication used the existing publisher account and the native file picker.
 
 The disposable Zotero test process was stopped and its installer volume unmounted after verification. No personal Zotero library or sync account was used.
