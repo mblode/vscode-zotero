@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-08",
+  "versions": {
+    "zotero": "10.0.1",
+    "betterbibtex": "9.0.63"
+  },
+  "probe": "ready",
+  "formats": {
+    "pandoc": "@Author:2026-test",
+    "biblatex": "\\autocite{Author:2026-test}",
+    "natbib": "\\cite{Author:2026-test}",
+    "typst": "#cite(<Author:2026-test>)"
+  },
+  "attachments": [
+    {
+      "open": "zotero://open-pdf/library/items/K6J74ZSS",
+      "path": "/synthetic-library/storage/K6J74ZSS/fixture.PDF"
+    }
+  ],
+  "pdf": "zotero://open-pdf/library/items/K6J74ZSS",
+  "nativePicker": "[@Author:2026-test]"
+}

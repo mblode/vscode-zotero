@@ -1,100 +1,144 @@
 {
-    "name": "zotero",
-    "displayName": "Citation Picker for Zotero",
-    "description": "Zotero Better Bibtex citation picker for VS Code",
-    "version": "0.1.11",
-    "publisher": "mblode",
-    "author": {
-        "name": "Matthew Blode",
-        "email": "m@blode.co",
-        "url": "https://blode.co"
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "lint": "eslint src --ext ts"
-    },
-    "homepage": "https://github.com/mblode/vscode-zotero",
-    "bugs": {
-        "url": "https://github.com/mblode/vscode-zotero/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mblode/vscode-zotero.git"
-    },
-    "icon": "images/icon.png",
-    "engines": {
-        "vscode": "^1.84.0"
-    },
-    "categories": [
-        "Other"
+  "name": "zotero",
+  "displayName": "Citation Picker for Zotero",
+  "description": "Zotero Better Bibtex citation picker for VS Code",
+  "version": "0.2.0",
+  "publisher": "mblode",
+  "author": {
+    "name": "Matthew Blode",
+    "email": "m@blode.co",
+    "url": "https://blode.co"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run check && npm run compile",
+    "compile": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "check": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings src test scripts",
+    "test": "npm run compile && node --test test/*.test.cjs",
+    "test:extension": "node test/extension/run.cjs",
+    "package": "vsce package --no-dependencies --out zotero-0.2.0.vsix",
+    "format:check": "prettier --check src test scripts .github .vscode package.json tsconfig.json README.md CHANGELOG.md docs"
+  },
+  "homepage": "https://github.com/mblode/vscode-zotero",
+  "bugs": {
+    "url": "https://github.com/mblode/vscode-zotero/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mblode/vscode-zotero.git"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "zotero",
+    "betterbibtex",
+    "better bibtex",
+    "citations"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.zoteroCitationPicker",
+        "title": "Zotero Citation Picker"
+      },
+      {
+        "command": "extension.openInZotero",
+        "title": "Open in Zotero"
+      },
+      {
+        "command": "extension.openPDFZotero",
+        "title": "Open PDF from Zotero"
+      },
+      {
+        "command": "extension.zoteroCheckConnection",
+        "title": "Zotero: Check Connection"
+      }
     ],
-    "keywords": [
-        "markdown",
-        "zotero",
-        "betterbibtex",
-        "better bibtex",
-        "citations"
+    "keybindings": [
+      {
+        "command": "extension.zoteroCitationPicker",
+        "key": "alt+shift+z",
+        "when": "editorTextFocus || notebookEditorFocused"
+      },
+      {
+        "command": "extension.openInZotero",
+        "key": "ctrl+shift+z",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.openPDFZotero",
+        "key": "ctrl+alt+shift+z",
+        "when": "editorTextFocus"
+      }
     ],
-    "activationEvents": [],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.zoteroCitationPicker",
-                "title": "Zotero Citation Picker"
-            },
-            {
-                "command": "extension.openInZotero",
-                "title": "Open in Zotero"
-            },
-            {
-                "command": "extension.openPDFZotero",
-                "title": "Open PDF from Zotero"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "extension.zoteroCitationPicker",
-                "key": "alt+shift+z"
-            },
-            {
-                "command": "extension.openInZotero",
-                "key": "ctrl+shift+z"
-            },
-            {
-                "command": "extension.openPDFZotero",
-                "key": "ctrl+alt+shift+z"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "Zotero Citation Picker",
-            "properties": {
-                "zotero-citation-picker.port": {
-                    "type": "string",
-                    "default": "http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc",
-                    "description": "Customise what port/URL will be used for the picker."
-                }
-            }
+    "configuration": {
+      "type": "object",
+      "title": "Zotero Citation Picker",
+      "properties": {
+        "zotero-citation-picker.port": {
+          "type": "string",
+          "default": "http://127.0.0.1:23119/better-bibtex/cayw?format=pandoc",
+          "description": "Better BibTeX CAYW URL. PDF lookup and diagnostics use the same host, port, and path prefix.",
+          "scope": "language-overridable"
+        },
+        "zotero-citation-picker.format": {
+          "type": "string",
+          "enum": [
+            "configured",
+            "auto",
+            "pandoc",
+            "biblatex",
+            "natbib",
+            "typst",
+            "formatted-citation",
+            "formatted-bibliography"
+          ],
+          "default": "configured",
+          "scope": "language-overridable",
+          "description": "Keep the URL format, or override it. Auto uses biblatex for TeX, typst for Typst, and pandoc elsewhere."
+        },
+        "zotero-citation-picker.timeout": {
+          "type": "number",
+          "default": 300,
+          "minimum": 10,
+          "maximum": 1800,
+          "scope": "resource",
+          "description": "Seconds to wait while you choose citations in Zotero."
         }
-    },
-    "devDependencies": {
-        "@types/mocha": "^10.0.3",
-        "@types/node": "18.x",
-        "@types/request-promise": "^4.1.50",
-        "@types/vscode": "^1.84.0",
-        "@typescript-eslint/eslint-plugin": "^6.9.0",
-        "@typescript-eslint/parser": "^6.9.0",
-        "@vscode/test-electron": "^2.3.6",
-        "eslint": "^8.52.0",
-        "glob": "^10.3.10",
-        "mocha": "^10.2.0",
-        "typescript": "^5.2.2"
-    },
-    "dependencies": {
-        "request": "^2.88.0",
-        "request-promise": "^4.2.5"
+      }
     }
+  },
+  "devDependencies": {
+    "@types/node": "26.5.0",
+    "@types/vscode": "1.84.2",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "3.9.2",
+    "esbuild": "0.28.2",
+    "oxlint": "1.82.0",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2"
+  },
+  "license": "MIT",
+  "extensionKind": [
+    "ui"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Citation commands work with user settings; workspace connection URLs require trust.",
+      "restrictedConfigurations": [
+        "zotero-citation-picker.port"
+      ]
+    }
+  }
 }

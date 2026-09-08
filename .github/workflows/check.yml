@@ -1,0 +1,55 @@
+name: Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  extension:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            vscode: 1.84.2
+          - os: ubuntu-latest
+            vscode: stable
+          - os: windows-latest
+            vscode: stable
+          - os: macos-latest
+            vscode: stable
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test
+      - run: npm audit
+      - run: npm run package
+      - name: Extract release package
+        shell: bash
+        run: python -c "import zipfile; zipfile.ZipFile('zotero-0.2.0.vsix').extractall('.vscode-test/packaged')"
+      - name: Test packaged extension (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:extension
+        env:
+          VSCODE_VERSION: ${{ matrix.vscode }}
+          ZOTERO_EXTENSION_PATH: ${{ github.workspace }}/.vscode-test/packaged/extension
+      - name: Test packaged extension (macOS and Windows)
+        if: runner.os != 'Linux'
+        run: npm run test:extension
+        env:
+          VSCODE_VERSION: ${{ matrix.vscode }}
+          ZOTERO_EXTENSION_PATH: ${{ github.workspace }}/.vscode-test/packaged/extension
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: zotero-${{ matrix.os }}-${{ matrix.vscode }}
+          path: zotero-0.2.0.vsix
