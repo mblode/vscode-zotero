@@ -26,3 +26,7 @@ Keep the existing Marketplace ID and all three command IDs. Fix connection failu
 ## Boundaries and recovery
 
 The Linux Flatpak Zotero 7 crash (#36) needs a Zotero-side stack trace/reproducer; do not claim that upgrading this extension fixes it. Native picker, inline citation rendering and bibliography generation are separate features. Open VSX publication requires existing publisher access; provide the VSIX if unavailable. Browser-only VS Code cannot reach the local desktop integration. Release rollback is an incremented patch with the previous source; keep the previous Marketplace package available.
+
+## Execution record
+
+Implemented and pushed as `ce75f8f53db8ca1a17bdf08a9fcc0a0488379601`. All 63 regressions and four cross-platform CI jobs pass. The extracted VSIX also passed local minimum/stable editor tests and live Zotero 10.0.1 / Better BibTeX 9.0.63 checks in an isolated profile. GitHub and Marketplace 0.2.0 are published; both public downloads exactly match the tested package. Open VSX awaits browser authentication/upload access. See `docs/compatibility-audit.md` for exact evidence, issue dispositions, and publication status.

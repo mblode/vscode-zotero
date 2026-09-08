@@ -53,7 +53,7 @@ Links below refer to [mblode/vscode-zotero](https://github.com/mblode/vscode-zot
 
 ## Verification
 
-- Unit/command suite covers HTTP status errors, incomplete responses, timeout/abort, bounded response size, proxy variables, custom endpoints, JSON-RPC envelopes, attachments, selection replacement, clipboard recovery, multi-cursor edits, notebook fallback, duplicate requests, and diagnostics. Each test is executable with `npm test`.
+- All 63 unit/command regressions pass. The suite covers HTTP status errors, incomplete responses, timeout/abort, bounded response size, proxy variables, custom endpoints, JSON-RPC envelopes, attachments, selection replacement, clipboard recovery, multi-cursor edits, notebook fallback, duplicate requests, and diagnostics. Each test is executable with `npm test`.
 - Extracted release VSIX passes real VS Code 1.84.2 and 1.136.1 tests on macOS: activation, commands, multiple selections, a hidden original editor, a still-visible original editor, changed-document recovery, empty picker response, HTTP 500, TeX output, and connection diagnostics.
 - Current [Zotero 10.0.1](https://www.zotero.org/support/changelog) and [Better BibTeX 9.0.63](https://github.com/retorquere/zotero-better-bibtex/releases/tag/v9.0.63) were run in a disposable profile and data directory on macOS, with no personal library or sync account. A synthetic article and one-page PDF were imported. The native picker returned `[@Author:2026-test]`; selected-item requests returned Pandoc, biblatex, natbib, and Typst output. JSON-RPC readiness and PDF lookup succeeded on custom port 23129. Sanitized responses are in `test/fixtures/zotero-10.json`.
 - The fixture checks actual current [CAYW](https://retorque.re/zotero-better-bibtex/citing/cayw/) and [JSON-RPC](https://retorque.re/zotero-better-bibtex/exporting/json-rpc/) behavior. PDF URI resolution was verified; automatic OS protocol launching was tested with a VS Code API stub, not an interactive default-handler change.
@@ -62,4 +62,14 @@ Links below refer to [mblode/vscode-zotero](https://github.com/mblode/vscode-zot
 
 ## Release record
 
-Publication and CI verification are pending. Update this section with public version, artifact hash, and exact successful CI run after release.
+Source commit: `ce75f8f53db8ca1a17bdf08a9fcc0a0488379601`.
+
+[Release CI](https://github.com/mblode/vscode-zotero/actions/runs/34173659153) passed all four jobs: current stable VS Code on Windows, macOS, and Linux, plus VS Code 1.84.2 on Linux. Each job runs the 63 regressions, typecheck, lint, formatting, dependency audit, packaging, and real packaged editor tests. Local macOS tests also passed on VS Code 1.84.2 and 1.136.1.
+
+[GitHub release 0.2.0](https://github.com/mblode/vscode-zotero/releases/tag/v0.2.0) is published. Its downloaded artifact exactly matches the tested local VSIX, SHA-256 `4696246b38e0f31ce82e9b566f9042a8d57389e91988db3289458f53e277c042`.
+
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=mblode.zotero) reports 0.2.0, updated 2026-09-08T00:40:01.783Z. Its publicly downloaded VSIX, after HTTP gzip decompression, exactly matches the tested local package and GitHub release asset with the SHA-256 above.
+
+Open VSX still needs completion of browser sign-in or Chrome's file-upload permission before the same VSIX can be published. Its public listing remains 0.1.10; #20/#37 are not yet resolved. The tested package is available from the GitHub release for manual installation.
+
+The disposable Zotero test process was stopped and its installer volume unmounted after verification. No personal Zotero library or sync account was used.
