@@ -33,12 +33,12 @@ Install [Zotero](https://www.zotero.org/download/) and [Better BibTeX](https://r
 
 ## Commands
 
-| Command                  | Shortcut           | Action                                                                                     |
-| ------------------------ | ------------------ | ------------------------------------------------------------------------------------------ |
-| Zotero Citation Picker   | `alt+shift+z`      | Insert a citation at the cursor.                                                           |
-| Open in Zotero           | `ctrl+shift+z`     | Open the citekey under the cursor as a Zotero item.                                        |
-| Open PDF from Zotero     | `ctrl+alt+shift+z` | Open the first PDF attached to that item.                                                  |
-| Zotero: Check Connection | Command Palette    | Check the configured endpoint and report Zotero and Better BibTeX versions when available. |
+| Command                  | Shortcut / access                         | Action                                                                                     |
+| ------------------------ | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Zotero Citation Picker   | `alt+shift+z`                             | Insert a citation at the cursor.                                                           |
+| Open in Zotero           | Command Palette or editor context menu    | Open the citekey under the cursor as a Zotero item.                                        |
+| Open PDF from Zotero     | `ctrl+alt+shift+z` or editor context menu | Open the first PDF attached to that item.                                                  |
+| Zotero: Check Connection | Command Palette                           | Check the configured endpoint and report Zotero and Better BibTeX versions when available. |
 
 For item and PDF commands, select a single citation key or put the cursor inside it. Keys containing colons, hyphens, periods, and Unicode are supported, including keys inside Pandoc and TeX citations. PDF lookup searches My Library. If the item has no PDF, the item opens instead.
 

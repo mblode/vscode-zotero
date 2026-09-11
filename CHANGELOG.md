@@ -2,6 +2,10 @@
 
 All notable changes to the "zotero" extension will be documented in this file.
 
+## Unreleased
+
+- Stop binding Open in Zotero to Ctrl+Shift+Z so Redo remains available on Windows and Linux. Use the editor context menu or Command Palette instead ([#43](https://github.com/mblode/vscode-zotero/issues/43)).
+
 ## 0.2.0
 
 - Preserve citations when the original document changes, closes, or stops accepting edits. Capture selections before opening Zotero and replace multiple selections atomically.

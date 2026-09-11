@@ -15,6 +15,16 @@ exports.run = async () => {
     "extension.zoteroCheckConnection",
   ])
     assert.ok(commands.includes(id), id);
+  for (const binding of extension.packageJSON.contributes.keybindings) {
+    const key = String(binding.key).toLowerCase();
+    assert.notEqual(key, "ctrl+shift+z", binding.command);
+    assert.notEqual(key, "cmd+shift+z", binding.command);
+  }
+  const contextMenus =
+    extension.packageJSON.contributes.menus["editor/context"];
+  assert.ok(
+    contextMenus.some((item) => item.command === "extension.openInZotero"),
+  );
   let handler = (_req, res) => res.end("@Smith:2026-a");
   const server = http.createServer((req, res) => handler(req, res));
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));

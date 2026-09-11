@@ -70,16 +70,25 @@
         "when": "editorTextFocus || notebookEditorFocused"
       },
       {
-        "command": "extension.openInZotero",
-        "key": "ctrl+shift+z",
-        "when": "editorTextFocus"
-      },
-      {
         "command": "extension.openPDFZotero",
         "key": "ctrl+alt+shift+z",
         "when": "editorTextFocus"
       }
     ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.openInZotero",
+          "when": "editorTextFocus",
+          "group": "zotero@1"
+        },
+        {
+          "command": "extension.openPDFZotero",
+          "when": "editorTextFocus",
+          "group": "zotero@2"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "title": "Zotero Citation Picker",
