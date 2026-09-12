@@ -36,7 +36,7 @@ jobs:
       - run: npm run package
       - name: Extract release package
         shell: bash
-        run: python -c "import zipfile; zipfile.ZipFile('zotero-0.2.0.vsix').extractall('.vscode-test/packaged')"
+        run: python -c "import json, zipfile; zipfile.ZipFile('zotero-' + json.load(open('package.json'))['version'] + '.vsix').extractall('.vscode-test/packaged')"
       - name: Test packaged extension (Linux)
         if: runner.os == 'Linux'
         run: xvfb-run -a npm run test:extension
@@ -52,4 +52,4 @@ jobs:
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: zotero-${{ matrix.os }}-${{ matrix.vscode }}
-          path: zotero-0.2.0.vsix
+          path: zotero-*.vsix

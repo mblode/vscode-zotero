@@ -17,7 +17,7 @@
     "lint": "oxlint --deny-warnings src test scripts",
     "test": "npm run compile && node --test test/*.test.cjs",
     "test:extension": "node test/extension/run.cjs",
-    "package": "vsce package --no-dependencies --out zotero-0.2.1.vsix",
+    "package": "vsce package --no-dependencies",
     "format:check": "prettier --check src test scripts .github .vscode package.json tsconfig.json README.md CHANGELOG.md docs"
   },
   "homepage": "https://github.com/mblode/vscode-zotero",
