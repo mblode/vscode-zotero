@@ -127,13 +127,13 @@
     }
   },
   "devDependencies": {
-    "@types/node": "26.6.3",
+    "@types/node": "26.6.5",
     "@types/vscode": "1.84.2",
     "@vscode/test-electron": "3.1.0",
     "@vscode/vsce": "4.0.0",
     "esbuild": "0.28.2",
-    "oxlint": "1.86.0",
-    "prettier": "3.9.9",
+    "oxlint": "1.87.0",
+    "prettier": "3.9.10",
     "typescript": "7.0.2"
   },
   "license": "MIT",
